@@ -167,7 +167,11 @@ $(function(){
 
       this.listenTo(Todos, 'add', this.addOne);
       this.listenTo(Todos, 'reset', this.addAll);
-      this.listenTo(Todos, 'all', this.render);
+      var _this = this;
+      this.listenTo(Todos, 'all', function () {
+        console.log(arguments);
+        this.render();
+      });
 
       this.footer = this.$('footer');
       this.main = $('#main');

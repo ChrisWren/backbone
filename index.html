@@ -832,23 +832,40 @@ view.stopListening(model);
       Views as you see fit. The <tt>Backbone</tt> object itself mixes in <tt>Events</tt>,
       and can be used to emit any global events that your application needs.
     </p>
+    <ul>
+      <li><b>"all"</b> &mdash; this special event fires for <i>any</i> triggered event, passing the event name as the first argument. </li>
+    </ul>
 
+    <b>Model Events</b>
+    <ul class="small">
+      <li><b>"change"</b> (model, options) &mdash; when any attribute has changed. </li>
+      <li><b>"change:[attribute]"</b> (model, value, options) &mdash; when a specific attribute has changed. </li>
+      <li><b>"destroy"</b> (model, collection, options) &mdash; when a model is <a href="#Model-destroy">destroyed</a>. </li>
+      <li><b>"request"</b> (model, xhr, options) &mdash; when a model has started a request to the server. </li>
+      <li><b>"sync"</b> (model, resp, options) &mdash; when a model has been successfully fetched, saved, or destroyed. </li>
+      <li><b>"error"</b> (model, xhr, options) &mdash; when a model fails to be fetched, saved, or destroyed. </li>
+      <li><b>"invalid"</b> (model, error, options) &mdash; when a model's <a href="#Model-validate">validation</a> fails on the client. </li>
+    </ul>
+
+    <b>Collection Events</b>
+    Collections receive all events from models contained in them.
     <ul class="small">
       <li><b>"add"</b> (model, collection, options) &mdash; when a model is added to a collection. </li>
       <li><b>"remove"</b> (model, collection, options) &mdash; when a model is removed from a collection. </li>
       <li><b>"reset"</b> (collection, options) &mdash; when the collection's entire contents have been replaced. </li>
       <li><b>"sort"</b> (collection, options) &mdash; when the collection has been re-sorted. </li>
-      <li><b>"change"</b> (model, options) &mdash; when a model's attributes have changed. </li>
-      <li><b>"change:[attribute]"</b> (model, value, options) &mdash; when a specific attribute has been updated. </li>
-      <li><b>"destroy"</b> (model, collection, options) &mdash; when a model is <a href="#Model-destroy">destroyed</a>. </li>
-      <li><b>"request"</b> (model, xhr, options) &mdash; when a model (or collection) has started a request to the server. </li>
-      <li><b>"sync"</b> (model, resp, options) &mdash; when a model (or collection) has been successfully synced with the server. </li>
-      <li><b>"error"</b> (model, xhr, options) &mdash; when a model's <a href="#Model-save">save</a> call fails on the server. </li>
-      <li><b>"invalid"</b> (model, error, options) &mdash; when a model's <a href="#Model-validate">validation</a> fails on the client. </li>
-      <li><b>"route:[name]"</b> (params) &mdash; Fired by the router when a specific route is matched.</li>
-      <li><b>"route"</b> (route, params) &mdash; Fired by the router when <i>any</i> route has been matched.</li>
+    </ul>
+
+    <b>Router Events</b>
+    <ul class="small">
+      <li><b>"route:[name]"</b> (params) &mdash; when a specific route is matched.</li>
+      <li><b>"route"</b> (route, params) &mdash; when <i>any</i> route has been matched.</li>
       <li><b>"route"</b> (router, route, params) &mdash; Fired by history when <i>any</i> route has been matched.</li>
-      <li><b>"all"</b> &mdash; this special event fires for <i>any</i> triggered event, passing the event name as the first argument. </li>
+    </ul>
+
+    <b>History Events</b>
+    <ul class="small">
+      <li><b>"route"</b> (router, route, params) &mdash; when <i>any</i> route has been matched.</li>
     </ul>
 
     <p>
@@ -993,7 +1010,7 @@ var Library = Backbone.Model.extend({
       collection the model belongs to, and is used to help compute the model's
       <a href="#Model-url">url</a>. The <tt>model.collection</tt> property is
       normally created automatically when you first add a model to a collection.
-      Note that the reverse is not true, as passing this option to the constructor 
+      Note that the reverse is not true, as passing this option to the constructor
       will not automatically add the model to the collection. Useful, sometimes.
     </p>
 
@@ -2624,9 +2641,9 @@ ui.Chapter = Backbone.View.extend({
       <b class="header">template</b><code>view.template([data])</code>
       <br />
       While templating for a view isn't a function provided directly by Backbone,
-      it's often a nice convention to define a <b>template</b> function on your 
+      it's often a nice convention to define a <b>template</b> function on your
       views. In this way, when rendering your view, you have convenient access to
-      instance data (<tt>this.model</tt>, <tt>options</tt>, and so on). 
+      instance data (<tt>this.model</tt>, <tt>options</tt>, and so on).
       For example, using Underscore templates:
     </p>
 
@@ -3183,17 +3200,17 @@ var model = localBackbone.Model.extend(...);
 
     <p>
       <a href="http://www.zocdoc.com">ZocDoc</a> helps patients
-      find local, in-network doctors and dentists, see their real-time 
+      find local, in-network doctors and dentists, see their real-time
       availability, and instantly book appointments.
-      On the public side, the webapp uses Backbone.js to handle client-side state and rendering in 
+      On the public side, the webapp uses Backbone.js to handle client-side state and rendering in
       <a href="http://www.zocdoc.com/primary-care-doctors/los-angeles-13122pm">search pages</a>
-      and <a href="http://www.zocdoc.com/doctor/nathan-hashimoto-md-58078">doctor profiles</a>. 
-      In addition, the new version of the doctor-facing part of the website is a 
-      large single-page application that 
-      benefits from Backbone's structure and modularity. ZocDoc's Backbone 
-      classes are tested with 
-      <a href="http://pivotal.github.io/jasmine/">Jasmine</a>, and delivered 
-      to the end user with 
+      and <a href="http://www.zocdoc.com/doctor/nathan-hashimoto-md-58078">doctor profiles</a>.
+      In addition, the new version of the doctor-facing part of the website is a
+      large single-page application that
+      benefits from Backbone's structure and modularity. ZocDoc's Backbone
+      classes are tested with
+      <a href="http://pivotal.github.io/jasmine/">Jasmine</a>, and delivered
+      to the end user with
       <a href="http://getcassette.net/">Cassette</a>.
     </p>
 
